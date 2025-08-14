@@ -1,21 +1,35 @@
-def separa_letras_non_tail(palabra: str, i = 0, vocales = 0, consonantes = 0):
+def separa_letras_tail(palabra: str, contador: list[int] = [0, 0], i: int = 0):
     if i == len(palabra):
-        return [vocales, consonantes]
+        if contador[0] > contador[1]:
+            return 'Vocales: ' + str(contador[0])
+        else:
+            return 'Consonantes: ' + str(contador[1])
     if palabra[i] in 'aeiou':
-        vocales += 1
+        contador[0] += 1
     else:
-        consonantes += 1
-    resultado = separa_letras_non_tail(palabra, i+1, vocales, consonantes)
-    print(resultado[0])
-    if resultado[0] > resultado[1]:
-        return 'Vocales: ' + str(resultado[0])
+        contador[1] += 1
+    return separa_letras_tail(palabra, contador, i+1)
+
+def separa_letras_non_tail(palabra: str, contador: list[int] = [0, 0], i: int = 0):
+    if i == len(palabra):
+        return contador
+    resultado = separa_letras_non_tail(palabra, contador, i+1)
+    if palabra[i] in 'aeiou':
+        contador[0] += 1
     else:
-        return resultado[1]
+        contador[1] += 1
+    if i == 0:
+        if contador[0] > contador[1]:
+            return 'Vocales: ' + str(contador[0])
+        else:
+            return 'Consonantes: ' + str(contador[1])
 
 
-
-    
+ 
+print(separa_letras_tail('aeiou'))
+print(separa_letras_tail('aeisgfg', [0,0]))
+print()
 print(separa_letras_non_tail('aeiou'))
-print(separa_letras_non_tail('aeisgfg'))
+print(separa_letras_non_tail('aeisgfg', [0,0]))
 
 
