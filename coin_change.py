@@ -3,7 +3,7 @@ def coin_change(coins: list[int], amount: int) -> int:
     def dp(coins, amount, current = 0, count = 0, ways = []):
         for coin in coins:
             if coin + current == amount:
-                count += 1
+                current += coin
                 ways.append(count)
             if coin + current < amount:
                 current += coin
@@ -14,8 +14,8 @@ def coin_change(coins: list[int], amount: int) -> int:
         if ways == []:
             return -1
         else:
-            return ways
-            #return min(ways)
+            #return ways
+            return min(ways)
     return dp(coins, amount)
 
 
