@@ -1,24 +1,25 @@
 def coin_change(coins: list[int], amount: int) -> int:
-    memo = {amount: float('inf')}
+    memo = {}
     def dp(coins, amount):
-        #print(amount)
+        if amount in memo:
+            return memo[amount]
+        memo[amount] = float('inf')
         for coin in coins:
-            if amount - coin < 0:
-                return float('inf')
             if amount - coin == 0:
-                return 0
-            else:
-                resultado = 1 + dp(coins, amount - coin)
-                print(resultado)
+                memo[amount] = 1
+                return 1
+            if amount - coin > 0:
+                resultado = dp(coins, amount - coin)
+                resultado = 1 + resultado
                 memo[amount] = min(resultado, memo[amount])
+            else:
+                return float('inf')
+        return memo[amount]
     dp(coins, amount)
     return memo[amount]
 
 
-print(coin_change([1,2,3], 5)) # ---> 2
-print()
+print(coin_change([1,2,3], 45)) # ---> 2
 print(coin_change([1,2,3], 3)) # ---> 1
-# print()
-# print(coin_change([1,2,5], 11)) # ---> 3
-# print()
-# print(coin_change([2], 3)) # ---> -1
+print(coin_change([1,2,5], 11)) # ---> 3
+print(coin_change([2], 3)) # ---> -1
