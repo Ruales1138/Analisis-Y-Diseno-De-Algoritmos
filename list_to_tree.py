@@ -3,18 +3,26 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
-
-def construir_arbol(nums, inicio = None, fin = None):
+    def __repr__(self):
+        return str(self.val)
+        
+def print_tree(node, prefix="", is_left=True):
+    if node is not None:
+        print_tree(node.right, prefix + ("│   " if is_left else "    "), False)
+        print(prefix + ("└── " if is_left else "┌── ") + str(node.val))
+        print_tree(node.left, prefix + ("    " if is_left else "│   "), True)
+        
+def crear_arbol(lista, inicio = None, fin = None):
     if inicio is None:
         inicio = 0
     if fin is None:
-        fin = len(nums)-1
+        fin = len(lista)-1
     if inicio > fin:
         return
     mitad = (inicio + fin) // 2
-    nodo = TreeNode(nums[mitad])
-    nodo.left = construir_arbol(nums, inicio, mitad-1)
-    nodo.right = construir_arbol(nums, mitad+1, fin)
+    nodo = TreeNode(lista[mitad])
+    nodo.left = crear_arbol(lista, inicio, mitad-1)
+    nodo.right = crear_arbol(lista, mitad+1, fin)
     return nodo
 
 def imprimir_arbol(raiz):
@@ -35,6 +43,6 @@ def imprimir_arbol(raiz):
     return resultado
 
 
-nums = [-10, -3, 0, 5, 9]
-nodo = construir_arbol(nums)
+nodo = crear_arbol(list(range(1,15)))
+print(print_tree(nodo))
 print(imprimir_arbol(nodo))
