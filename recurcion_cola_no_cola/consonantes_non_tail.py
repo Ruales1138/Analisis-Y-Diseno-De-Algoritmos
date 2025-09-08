@@ -25,7 +25,6 @@ def separa_letras_non_tail(palabra: str, contador: list[int] = [0, 0], i: int = 
             return 'Consonantes: ' + str(contador[1])
 
 
- 
 print(separa_letras_tail('aeiou'))
 print(separa_letras_tail('aeisgfg', [0,0]))
 print()
