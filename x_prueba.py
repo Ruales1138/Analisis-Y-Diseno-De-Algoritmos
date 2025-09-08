@@ -26,6 +26,7 @@ def all_possible_full_binary_trees(total_nodes):
         # Repartimos n-1 nodos entre el subárbol izquierdo y derecho
         for left_count in range(1, n, 2):  # solo números impares
             right_count = n - 1 - left_count
+            print(left_count, right_count)
 
             # Generamos todas las combinaciones de subárboles
             left_subtrees = build_trees(left_count)
