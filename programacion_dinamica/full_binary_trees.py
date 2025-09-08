@@ -22,13 +22,31 @@ def full_binary_trees(n):
             return memo[n]
         if n == 1:
             return [TreeNode(0)]
+        trees = []
+        for left_count in range(1, n, 2):
+            right_count = n-1-left_count
+            left = full_binary_trees(left_count)
+            right = full_binary_trees(right_count)
+            print(left, right)
+            for l in left:
+                for r in right:
+                    root = TreeNode(0)
+                    root.left = l
+                    root.right = r
+                    trees.append(root)
+        memo[n] = trees
+        return memo[n]
     return dp(n)
 
-print(full_binary_trees(2)) # -> []
-print(full_binary_trees(1)) # -> [0]
-print(full_binary_trees(3)) # -> [[0,0,0]]
-print(full_binary_trees(7)) # -> [[0,0,0,null,null,0,0,null,null,0,0],
+# print(full_binary_trees(11)) # -> []
+# print(full_binary_trees(2)) # -> []
+# print(full_binary_trees(1)) # -> [0]
+# print(full_binary_trees(3)) # -> [[0,0,0]]
+# print(full_binary_trees(7)) # -> [[0,0,0,null,null,0,0,null,null,0,0],
                             #     [0,0,0,null,null,0,0,0,0],
                             #     [0,0,0,0,0,0,0],
                             #     [0,0,0,0,0,null,null,null,null,0,0],
                             #     [0,0,0,0,0,null,null,0,0]]
+nodos = full_binary_trees(5)
+for n in nodos:
+    print_tree(n)
