@@ -27,7 +27,6 @@ def full_binary_trees(n):
             right_count = n-1-left_count
             left = full_binary_trees(left_count)
             right = full_binary_trees(right_count)
-            print(left, right)
             for l in left:
                 for r in right:
                     root = TreeNode(0)
@@ -47,6 +46,6 @@ def full_binary_trees(n):
                             #     [0,0,0,0,0,0,0],
                             #     [0,0,0,0,0,null,null,null,null,0,0],
                             #     [0,0,0,0,0,null,null,0,0]]
-nodos = full_binary_trees(5)
+nodos = full_binary_trees(7)
 for n in nodos:
     print_tree(n)
