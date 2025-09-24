@@ -1,4 +1,4 @@
-def sum_coins(coins, amount):
+def coin_change(coins, amount):
     coins.sort(reverse=True)
     def sum(coins, amount, i=0):
         if i == len(coins):
@@ -12,5 +12,5 @@ def sum_coins(coins, amount):
             return sum(coins, amount, i+1)
     return sum(coins, amount)
 
-print(sum_coins([100,15,20], 50))
-print(sum_coins([1], 200))
+print(coin_change([100,15,20], 50))
+print(coin_change([1], 200))
