@@ -6,14 +6,12 @@ def conectar_cuerdas(arr):
         if len(arr_cuerdas) > 1:
             cuerda_1 = heapq.heappop(arr_cuerdas)
             cuerda_2 = heapq.heappop(arr_cuerdas)
-            return cuerda_1 + cuerda_2
+            costo = cuerda_1 + cuerda_2
+            heapq.heappush(arr_cuerdas, costo)
+            return costo + recurcion(arr_cuerdas)
         else:
-            cuerda_1 = heapq.heappop(arr_cuerdas)
-            return cuerda_1
-
-
+            return 0
     return recurcion(arr)
-
 
 print(conectar_cuerdas([4, 3, 2, 6])) # -> 29
 print(conectar_cuerdas([10])) # -> 0
