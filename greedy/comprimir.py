@@ -55,22 +55,20 @@ arbol_2 = comprimir('BCAADDDCCACACAC')
 print()
 print_tree(arbol_2)
 
-def codificar(arbol, nodo_actual=None, ruta_actual=[], rutas=[]):
-    if nodo_actual is None:
-        nodo_actual = arbol
-    if nodo_actual.left:
-        ruta_actual.append(0)
-        codificar(nodo_actual.left)
-        ruta_actual.pop()
-    if nodo_actual.right:
-        ruta_actual.append(1)
-        codificar(nodo_actual.right)
-        ruta_actual.pop()
-    if not nodo_actual.left and not nodo_actual.right:
-        print('aaa')
-        copia = ruta_actual.copy()
-        rutas.append(copia)
-        print(rutas)
-        ruta_actual = []
+def codificar(arbol):
+    def recurcion(arbol, nodo_actual=None, ruta_actual='', rutas=[]):
+        if nodo_actual is None:
+            nodo_actual = arbol
+        if nodo_actual.left:
+            recurcion(arbol, nodo_actual.left, ruta_actual + '0', rutas)
+        if nodo_actual.right:
+            recurcion(arbol, nodo_actual.right, ruta_actual + '1', rutas)
+        if not nodo_actual.left and not nodo_actual.right:
+            valor = nodo_actual.val[1]
+            rutas.append((valor, ruta_actual))
+        return rutas
+    rutas = recurcion(arbol)
+    return rutas
 
-print(codificar(arbol_1))
+rutas = codificar(arbol_2)
+print(rutas)
