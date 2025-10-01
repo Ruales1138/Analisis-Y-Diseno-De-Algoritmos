@@ -17,12 +17,10 @@ def comprimir(string, valores=None, nuevo_nodo=None):
                 frecuencia[letra] = 1
             else:
                 frecuencia[letra] += 1
-        print(frecuencia)
         valores = []
         for clave, valor in frecuencia.items():
             valores.append((valor, clave))
         heapq.heapify(valores)
-    print('v', valores)
     if len(valores) > 1:
         valor_1 = heapq.heappop(valores)
         valor_2 = heapq.heappop(valores)
@@ -39,7 +37,6 @@ def comprimir(string, valores=None, nuevo_nodo=None):
         nuevo_nodo = TreeNode(nuevo_valor)
         nuevo_nodo.left = nodo_1
         nuevo_nodo.right = nodo_2
-        print(nuevo_nodo.left, nuevo_nodo, nuevo_nodo.right)
         heapq.heappush(valores, nuevo_valor)
         return comprimir(string, valores, nuevo_nodo)
     else:
@@ -51,9 +48,29 @@ def print_tree(node, prefix="", is_left=True):
         print(prefix + ("└── " if is_left else "┌── ") + str(node.val))
         print_tree(node.left, prefix + ("    " if is_left else "│   "), True)
 
-arbol = comprimir('ABDDDCABCADAA')
+arbol_1 = comprimir('ABDDDCABCADAA')
 print()
-print_tree(arbol)
-arbol_2 = comprimir('BCAADDDCCACACAC', None, None)
+print_tree(arbol_1)
+arbol_2 = comprimir('BCAADDDCCACACAC')
 print()
 print_tree(arbol_2)
+
+def codificar(arbol, nodo_actual=None, ruta_actual=[], rutas=[]):
+    if nodo_actual is None:
+        nodo_actual = arbol
+    if nodo_actual.left:
+        ruta_actual.append(0)
+        codificar(nodo_actual.left)
+        ruta_actual.pop()
+    if nodo_actual.right:
+        ruta_actual.append(1)
+        codificar(nodo_actual.right)
+        ruta_actual.pop()
+    if not nodo_actual.left and not nodo_actual.right:
+        print('aaa')
+        copia = ruta_actual.copy()
+        rutas.append(copia)
+        print(rutas)
+        ruta_actual = []
+
+print(codificar(arbol_1))
