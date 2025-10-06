@@ -1,7 +1,2 @@
-s = ''
-s += '0'
-print(s)
-s += '0'
-s += '0'
-print(s)
-s.pop()
+nums = [(x, 'par') if x % 2 == 0 else (x,'impar') for x in range(10)]
+print(nums)
