@@ -5,18 +5,29 @@ def remove_duplicate(string):
             letras_dict[letra] = 1
         else:
             letras_dict[letra] += 1
-    print(letras_dict)
-    min = 'z'
+    min = string[0]
     resultado = []
-    for letra in string:
-        print(min)
-        resultado.append(letra)
-        if letra < min:
-            min = letra
-        if min in letras_dict:
-            resultado.remove(min)
-            
+    print(letras_dict)
     print(resultado)
+    print(min)
+    for letra in string:
+        letras_dict[letra] -= 1
+        if letra not in resultado:
+            resultado.append(letra)
+        else:
+            if resultado[0] == letra:
+                resultado.remove(letra)
+                resultado.append(letra)
+        if letra < min:
+            if letras_dict[min] > 0:
+                resultado.remove(min)
+            min = letra
+        print(resultado)
+        print(min)
+    return resultado
 
 print(remove_duplicate('bcabc')) # -> abc
+print('----------------')
 print(remove_duplicate('cbacdcbc')) # -> acdb
+print('----------------')
+print(remove_duplicate('bacbcacc')) # -> abc
