@@ -1,4 +1,4 @@
-def max_min(nums, start = None, end = None):
+def max_min(nums, start=None, end=None):
     if start is None:
         start = 0
         end = len(nums)-1
